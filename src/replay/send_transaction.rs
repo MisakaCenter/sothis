@@ -1,3 +1,6 @@
+use std::thread::sleep;
+use std::time::Duration;
+
 use crate::rpc::error::RequestError;
 use crate::rpc::types::Transaction;
 use crate::RpcConnection;
@@ -26,6 +29,7 @@ pub async fn send_transactions(
     entropy_threshold: f32,
     exit_on_tx_fail: bool,
     send_as_unsigned: bool,
+    replay_delay: u64
 ) -> Result<(), Box<dyn std::error::Error>> {
     let tx_amount = historical_txs.len() as f32;
     let mut fail_tx_amount: f32 = 0.0;
@@ -43,6 +47,8 @@ pub async fn send_transactions(
                 }
             }
         }
+        // delay
+        sleep(Duration::from_millis(replay_delay));
     }
 
     // Calculate the percentage of failed transactions

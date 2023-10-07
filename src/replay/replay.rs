@@ -39,11 +39,11 @@ pub async fn replay_historic_blocks(
     }
 
     // set automine to false
-    replay_rpc.evm_set_automine(false).await?;
+    // replay_rpc.evm_set_automine(false).await?;
     // set insanely high interval for the blocks
-    replay_rpc
-        .evm_set_interval_mining(std::u32::MAX.into())
-        .await?;
+    // replay_rpc
+    //     .evm_set_interval_mining(std::u32::MAX.into())
+    //     .await?;
 
     loop {
         // we write a bit of illegible code
@@ -63,16 +63,17 @@ pub async fn replay_historic_blocks(
             entropy_threshold,
             exit_on_tx_fail,
             send_as_raw,
+            replay_delay
         )
         .await?;
 
         // set next block timestamp
-        replay_rpc
-            .evm_set_next_block_timestamp(hex_to_decimal(&historical_block.timestamp)?)
-            .await?;
+        // replay_rpc
+        //     .evm_set_next_block_timestamp(hex_to_decimal(&historical_block.timestamp)?)
+        //     .await?;
 
         // mine the block
-        replay_rpc.evm_mine().await?;
+        // replay_rpc.evm_mine().await?;
         println!(
             "Successfully replayed block {}",
             hex_to_decimal(&hex_block)?
