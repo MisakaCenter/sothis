@@ -178,7 +178,7 @@ Once you are done tracking the slot, terminate the process via a `SIGTERM` or a 
 ## Installation
 
 Sothis is a rust crate. You can install it with cargo:
-`cargo install sothis`
+`cargo install --path .`
 
 ## FAQ
 
